@@ -1,3 +1,3 @@
 include:
-  - .plugin
+  - .plugins
   - .server

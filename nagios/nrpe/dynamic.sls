@@ -15,7 +15,7 @@
 
 include:
   - .server
-  - .plugin
+  - .plugins
 
 {% if salt['pillar.get']("nagios:checks", False) %}
 {% for check_name, check_def in salt['pillar.get']("nagios:checks").items() %}

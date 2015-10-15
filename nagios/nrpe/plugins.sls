@@ -1,8 +1,6 @@
 {% from "nagios/map.jinja" import nrpe with context %}
 
-nrpe-plugin-package:
-  pkg.installed:
-    - name: {{ nrpe.plugin }}
+{# This will install any custom (unpackaged) plugins you've got in salt #}
 
 {{ nrpe.plugin_dir }}:
   file.recurse:

@@ -28,6 +28,7 @@
         'lock_file': '/var/nagios/nagios.lock',
         'log': '/var/nagios/nagios.log',
         'log_archive_path': '/var/nagios/archives',
+        'nrpe_plugin_pkg': 'nrpe',
         'object_cache': '/var/nagios/objects.cache',
         'p1_file': '/usr/share/nagios/bin/p1.pl',
         'precached_object_file': '/var/nagios/objects.precache',
@@ -48,6 +49,7 @@
         'lock_file': '/var/run/nagios3/nagios3.pid',
         'log': '/var/log/nagios3/nagios.log',
         'log_archive_path': '/var/log/nagios3/archives',
+        'nrpe_plugin_pkg': 'nagios-nrpe-plugin',
         'object_cache': '/var/cache/nagios3/objects.cache',
         'p1_file': '/usr/lib/nagios3/p1.pl',
         'precached_object_file': '/var/lib/nagios3/objects.precache',
@@ -68,6 +70,7 @@
         'lock_file': '/var/run/nagios.pid',
         'log': '/var/log/nagios/nagios.log',
         'log_archive_path': '/var/log/nagios/archives',
+        'nrpe_plugin_pkg': 'nrpe-plugin',
         'object_cache': '/var/log/nagios/objects.cache',
         'p1_file': '/usr/sbin/p1.pl',
         'precached_object_file': '/var/log/nagios/objects.precache',
@@ -83,22 +86,22 @@
 
 {% set nrpe = salt['grains.filter_by']({
     'default': {
-        'plugin_dir': '/usr/lib/nagios/plugins',
+        'plugins_dir': '/usr/lib/nagios/plugins',
     },
     'Arch': {
-        'plugin': 'nagios-nrpe-plugin',
-        'server': 'nagios-nrpe',
+        'plugins': 'monitoring-plugins',
+        'server':  'nagios-nrpe',
         'service': 'nrpe',
     },
     'Debian': {
         'cfg_dir': '/etc/nagios/nrpe.d',
-        'plugin': 'nagios-nrpe-plugin',
-        'server': 'nagios-nrpe-server',
+        'plugins': 'nagios-plugins-basic',
+        'server':  'nagios-nrpe-server',
         'service': 'nagios-nrpe-server',
     },
     'RedHat': {
-        'plugin': 'nagios-plugins-all',
-        'server': 'nrpe',
+        'plugins': 'nagios-plugins-all',
+        'server':  'nrpe',
         'service': 'nrpe',
     },
 }, merge=salt['pillar.get']('nagios:lookup:nrpe')) %}
